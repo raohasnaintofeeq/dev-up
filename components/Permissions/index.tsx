@@ -11,7 +11,7 @@ const users = [
   { id: 3, name: 'User 3' },
 ];
 
-const permissions = [
+const permissions: string[] = [
   'Read',
   'Write',
   'Delete',
@@ -39,7 +39,7 @@ const PermissionForm = () => {
     <Formik
       initialValues={{
         user: '',
-        permissions: [],
+        permissions: [] as string[],
       }}
       validationSchema={validationSchema}
       onSubmit={(values) => {
