@@ -12,6 +12,9 @@ const UserManagement = ({ roles }: any) => {
   const handleAssignRole = () => {
     setUsers(users.map(user => String(user.id) === selectedUser ? { ...user, role: selectedRole } : user));
   };
+  console.log("user :: ", users)
+  console.log("role :: ", roles)
+  console.log("selectedrole :: ", selectedRole)
 
   return (
     <Grid container spacing={4}>
@@ -38,7 +41,7 @@ const UserManagement = ({ roles }: any) => {
             value={selectedRole}
             onChange={(e) => setSelectedRole(e.target.value)}
           >
-            {roles.map(({ role, index }: any) => (
+            {roles.map((role, index ) => (
               <MenuItem key={index} value={role}>
                 {role}
               </MenuItem>

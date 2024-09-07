@@ -7,8 +7,11 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useRouter } from 'next/navigation';
+import { setCookie } from 'cookies-next';
+
 const LoginPage = () => {
   const router = useRouter();
+
   const initialValues = {
     email: '',
     password: '',
@@ -20,10 +23,18 @@ const LoginPage = () => {
     password: Yup.string().min(8, 'Password must be at least 8 characters').required('Required'),
   });
 
-  const onSubmit = (values: any) => {
-    console.log(values);
-    router.push('/admin')
-    // Handle form submission, e.g., API call
+  const onSubmit = async (values: any) => {
+    // Simulate a login API call and token generation
+    const simulatedToken = '1234567890abcdef';
+
+    // Store the token in a cookie
+    setCookie('token', simulatedToken, {
+      maxAge: values.remember ? 30 * 24 * 60 * 60 : undefined, // 30 days if 'remember me' is checked
+      secure: true
+    });
+
+    // Redirect to a protected route
+    router.push('/admin');
   };
 
   return (
@@ -118,7 +129,7 @@ const LoginPage = () => {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fnature%2F&psig=AOvVaw0mKlTg-kvevqC6nIWoCqoE&ust=1724498598656000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKi_5oaAi4gDFQAAAAAdAAAAABAE',
+          backgroundImage: 'url(/path-to-your-image.jpg)',
           backgroundRepeat: 'no-repeat',
           backgroundColor: (t) =>
             t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

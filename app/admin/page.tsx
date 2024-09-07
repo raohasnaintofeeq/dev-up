@@ -3,6 +3,8 @@ import * as React from 'react';
 import { AppBar, Box, CssBaseline, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
 import { ArrowBack as ArrowBackIcon, ArrowForward as ArrowForwardIcon, Dashboard as DashboardIcon, AccountCircle as AccountCircleIcon, Settings as SettingsIcon } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
+import LogoutIcon from '@mui/icons-material/Logout';
+
 const drawerWidth = 240;
 
 function Dashboard() {
@@ -35,6 +37,12 @@ function Dashboard() {
             <SettingsIcon />
           </ListItemIcon>
            <ListItemText primary="Settings" />
+        </ListItem>
+        <ListItem>
+          <ListItemIcon onClick={() => router.push('')}>
+            <LogoutIcon />
+          </ListItemIcon>
+          <ListItemText primary="Logout" />
         </ListItem>
       </List>
     </div>
