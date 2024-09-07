@@ -41,7 +41,7 @@ const UserManagement = ({ roles }: any) => {
             value={selectedRole}
             onChange={(e) => setSelectedRole(e.target.value)}
           >
-            {roles.map((role, index ) => (
+            {roles.map((role: any, index: any ) => (
               <MenuItem key={index} value={role}>
                 {role}
               </MenuItem>
