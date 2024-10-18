@@ -1,106 +1,132 @@
-"use client"
-import * as React from 'react';
-import { AppBar, Box, CssBaseline, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
-import { ArrowBack as ArrowBackIcon, ArrowForward as ArrowForwardIcon, Dashboard as DashboardIcon, AccountCircle as AccountCircleIcon, Settings as SettingsIcon } from '@mui/icons-material';
+'use client'
+import React, { useState } from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import MenuIcon from '@mui/icons-material/Menu';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import { useRouter } from 'next/navigation';
-import LogoutIcon from '@mui/icons-material/Logout';
 
 const drawerWidth = 240;
+const routes = [
+  {
+    name: "Add Student",
+    url: "/admin/addstudents",
+  },
+  {
+    name: "All Students",
+    url: "/admin/students",
+  },
+  {
+    name: "Attendance",
+    url: "/admin/Contact"
+  }
+]
 
-function Dashboard() {
+export default function DrawerAppBar(props: any) {
   const router = useRouter();
-  const [sidebarOpen, setSidebarOpen] = React.useState(true);
+  const { window } = props;
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
+  const handleDrawerToggle = () => {
+    setMobileOpen((prevState) => !prevState);
   };
-  console.log("sidebar toggling", sidebarOpen)
+  const handleClick = (url: string) => {
+    router.push(url)
+  }
 
   const drawer = (
-    <div>
-      <Toolbar />
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+      <Typography variant="h6" sx={{ my: 2 }}>
+        Online Attendane
+      </Typography>
+      <Divider />
       <List>
-        <ListItem>
-          <ListItemIcon onClick={() => router.push('/admin/dashboard')}>
-            <DashboardIcon />
-          </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-        </ListItem>
-        <ListItem>
-          <ListItemIcon onClick={() => router.push('/admin/inventory/stocks')}>
-            <AccountCircleIcon />
-          </ListItemIcon>
-            <ListItemText primary="Profile" />
-        </ListItem>
-        <ListItem>
-          <ListItemIcon onClick={() => router.push('/admin/inventory/permissions')}>
-            <SettingsIcon />
-          </ListItemIcon>
-           <ListItemText primary="Settings" />
-        </ListItem>
-        <ListItem>
-          <ListItemIcon onClick={() => router.push('')}>
-            <LogoutIcon />
-          </ListItemIcon>
-          <ListItemText primary="Logout" />
-        </ListItem>
+        {routes.map((item, index) => (
+          <ListItem key={index} disablePadding onClick={() => handleClick(item.url)}>
+            <ListItemButton sx={{ textAlign: 'center' }}>
+              <ListItemText primary={item.name} />
+            </ListItemButton>
+          </ListItem>
+        ))}
       </List>
-    </div>
+    </Box>
   );
 
+  const container = window !== undefined ? () => window().document.body : undefined;
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{ 
-          width: sidebarOpen ? `calc(100% - ${drawerWidth}px)` : `calc(100% - 56px)`, // 56px to account for the icon width when collapsed
-          ml: sidebarOpen ? `${drawerWidth}px` : '56px',
-        }}
-      >
+      <AppBar component="nav" position='fixed'>
         <Toolbar>
           <IconButton
             color="inherit"
-            aria-label="toggle sidebar"
+            aria-label="open drawer"
             edge="start"
-            onClick={toggleSidebar}
-            sx={{ mr: 2 }}
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { sm: 'none' } }}
           >
-            {sidebarOpen ? <ArrowBackIcon /> : <ArrowForwardIcon />}
+            <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Dashboard
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, cursor: "pointer" }}
+            onClick={() => router.push("/admin")}
+          >
+            Online Attendance
           </Typography>
+          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            {routes.map((item, index) => (
+              <Button key={index} sx={{ color: '#fff' }} onClick={() => handleClick(item.url)}>
+                {item.name}
+              </Button>
+            ))}
+          </Box>
         </Toolbar>
       </AppBar>
-      <Drawer
-        variant="persistent"
-        sx={{
-          width: sidebarOpen ? drawerWidth : '56px',
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: sidebarOpen ? drawerWidth : '56px',
-            transition: 'width 0.3s',
-            overflowX: 'hidden',
-          },
-        }}
-        open={!sidebarOpen}
-      >
-        {drawer}
-      </Drawer>
-      <Box
-        component="main"
-        sx={{ 
-          flexGrow: 1, 
-          p: 3, 
-          width: sidebarOpen ? `calc(100% - ${drawerWidth}px)` : `calc(100% - 56px)`,
-        }}
-      >
+      <nav>
+        <Drawer
+          container={container}
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          }}
+        >
+          {drawer}
+        </Drawer>
+      </nav>
+      <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
-        <Typography>hello hasnain</Typography>        
+        {/* <Typography>
+          hasnain
+        </Typography> */}
       </Box>
     </Box>
   );
 }
 
-export default Dashboard;
+// DrawerAppBar.propTypes = {
+//   /**
+//    * Injected by the documentation to work in an iframe.
+//    * You won't need it on your project.
+//    */
+//   window: PropTypes.func,
+// };
+
+// export default DrawerAppBar;
