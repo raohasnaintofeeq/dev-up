@@ -8,7 +8,7 @@ interface Props {
   name: string;
   fname: string;
 }
-const handleState = () => {
+const HandleState = () => {
   const [copy, setCopy] = useState([] as any)
   const initialValues: Props = {
     name: "",
@@ -45,4 +45,4 @@ const handleState = () => {
     </div>
   )
 }
-export default handleState;
+export default HandleState;
