@@ -1,6 +1,5 @@
 'use client'
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -36,7 +35,7 @@ const routes = [
 export default function DrawerAppBar(props: any) {
   const router = useRouter();
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);

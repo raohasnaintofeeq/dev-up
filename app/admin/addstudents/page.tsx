@@ -1,6 +1,6 @@
 "use client"
 import DrawerAppBar from "../page";
-import React from "react";
+import React,{ useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { setCookie } from "cookies-next";
 
@@ -9,7 +9,7 @@ interface Props {
   fname: string;
 }
 const handleState = () => {
-  const [copy, setCopy] = React.useState([] as any)
+  const [copy, setCopy] = useState([] as any)
   const initialValues: Props = {
     name: "",
     fname: ""
