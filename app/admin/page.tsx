@@ -113,20 +113,7 @@ export default function DrawerAppBar(props: any) {
       </nav>
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
-        {/* <Typography>
-          hasnain
-        </Typography> */}
       </Box>
     </Box>
   );
 }
-
-// DrawerAppBar.propTypes = {
-//   /**
-//    * Injected by the documentation to work in an iframe.
-//    * You won't need it on your project.
-//    */
-//   window: PropTypes.func,
-// };
-
-// export default DrawerAppBar;
