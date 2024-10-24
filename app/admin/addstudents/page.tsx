@@ -26,8 +26,6 @@ const HandleState = () => {
     rollnumber: 0
   }
 
-  console.log("window confirm", window.confirm)
-
   const handleSubmitForm = (values: Props) => {
     const payload = { ...values }
 

@@ -10,11 +10,8 @@ const StudentData = () => {
  if(getData){
     savedData = JSON.parse(getData)
   }
-  console.log("data :: ", savedData)
   const newarray = savedData.filter((item: { class: string; }) => item.class === "nine")
   const matricStudent = savedData.filter((item: { class: string; }) => item.class === "matric")
-  console.log("newarray :: ", newarray)
-  console.log("matric student :: ", matricStudent)
   return (
     <div>
       <DrawerAppBar />
