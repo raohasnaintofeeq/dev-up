@@ -1,47 +1,89 @@
 "use client"
 import DrawerAppBar from "../page";
-import React,{ useState } from "react";
-import { Formik, Form, Field } from "formik";
+import React, { useState } from "react";
+import { Formik, Form, FormikHelpers } from "formik";
 import { setCookie } from "cookies-next";
+import { Button, Typography } from "@mui/material";
+import InputField from "@/components/Fields/InputField";
+import SelectInput from "@/components/Fields/Select";
 
 interface Props {
   name: string;
   fname: string;
+  class: string;
+  rollnumber: number;
+}
+
+const width = {
+  width: "100%"
 }
 const HandleState = () => {
   const [copy, setCopy] = useState([] as any)
   const initialValues: Props = {
     name: "",
-    fname: ""
+    fname: "",
+    class: "",
+    rollnumber: 0
   }
 
   const handleSubmitForm = (values: Props) => {
-    const payload = {...values}
-    setCopy((prev: any) => {
-      return [...prev, payload]
-    })
-    setCookie("saveData ", copy)
+    const payload = { ...values }
 
-    console.log("copy :: ", copy)
+    setCopy((prev: any) => {
+      const updatedCopy = [...prev, payload]
+      setCookie("saveData ", updatedCopy)
+      return updatedCopy
+    })
   }
- 
+
   return (
     <div>
       <DrawerAppBar />
-      <Formik
-      initialValues={initialValues}
-      onSubmit={async(values) => {
-        await handleSubmitForm(values)
+      <div style={{
+        width: "35%",
+        marginLeft: "30%",
+        border: "1px solid",
+        borderRadius: "30px",
+        borderBlock: "1px"
       }}
       >
-        {() => (
-          <Form>
-            <Field name="name"/>
-            <Field name="fname"/>
-            <button type="submit">submit</button>
-          </Form>
-        )}
-      </Formik> 
+        <div style={{ margin: "40px", marginLeft: "8%" }}>
+          <Typography textAlign="center"  sx={{textAlign: "center", mb: 4}}
+          variant="h4">Add Student</Typography>
+          <Formik
+            initialValues={initialValues}
+            onSubmit={async (values, { resetForm }: FormikHelpers<Props>) => {
+              await handleSubmitForm(values)
+              resetForm()
+            }}
+          >
+            {() => (
+              <Form>
+                <InputField
+                  name="name"
+                  type="text"
+                  label="Enter name"
+                />
+                <InputField
+                  name="fname"
+                  type="text"
+                  label="Enter father name"
+                />
+                <SelectInput
+                  name="class"
+                  label="Enter class"
+                />
+                <InputField
+                  name="rollnumber"
+                  type="number"
+                  label="Enter roll number"
+                />
+                <Button type="submit" variant="outlined" fullWidth>+submit</Button>
+              </Form>
+            )}
+          </Formik>
+        </div>
+      </div>
     </div>
   )
 }
