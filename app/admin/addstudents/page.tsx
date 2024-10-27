@@ -47,7 +47,7 @@ const HandleState = () => {
         borderBlock: "1px"
       }}
       >
-        <div style={{ margin: "40px", marginLeft: "12%" }}>
+        <div style={{ margin: "40px", marginLeft: "8%" }}>
           <Typography textAlign="center"  sx={{textAlign: "center", mb: 4}}
           variant="h4">Add Student</Typography>
           <Formik
