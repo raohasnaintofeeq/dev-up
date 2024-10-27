@@ -5,13 +5,13 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 
 const StudentData = () => {
  const getData = getCookie("saveData")
- let savedData;
+ let savedData: any[] = [];
 
  if(getData){
     savedData = JSON.parse(getData)
   }
-  const newarray = savedData.filter((item: { class: string; }) => item.class === "nine")
-  const matricStudent = savedData.filter((item: { class: string; }) => item.class === "matric")
+  // const newarray = savedData.filter((item: { class: string; }) => item.class === "nine")
+  // const matricStudent = savedData.filter((item: { class: string; }) => item.class === "matric")
   return (
     <div>
       <DrawerAppBar />
@@ -27,7 +27,7 @@ const StudentData = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {savedData.map((entry: any, index: any) => (
+            {Array.isArray(savedData) && savedData.map((entry: any, index: any) => (
               <TableRow key={index}>
                 <TableCell>{entry.name}</TableCell>
                 <TableCell>{entry.fname}</TableCell>
