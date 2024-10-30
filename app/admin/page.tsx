@@ -29,6 +29,10 @@ const routes = [
   {
     name: "Attendance",
     url: "/admin/Attendance"
+  },
+  {
+    name: "Log Out",
+    url: "/auth/signin"
   }
 ]
 
@@ -81,7 +85,7 @@ export default function DrawerAppBar(props: any) {
             variant="h6"
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, cursor: "pointer" }}
-            onClick={() => router.push("/admin")}
+            onClick={() => router.push("/admin/dashboard")}
           >
             Online Attendance
           </Typography>
