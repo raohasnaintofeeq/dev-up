@@ -6,7 +6,6 @@ import { setCookie } from "cookies-next";
 import { Button, Typography } from "@mui/material";
 import InputField from "@/components/Fields/InputField";
 import SelectInput from "@/components/Fields/Select";
-// import {MyContext}from "@/app/context/page";
 
 interface Props {
   name: string;
@@ -42,7 +41,6 @@ const HandleState = () => {
   console.log("copy :: ", copy)
 
   return (
-    <MyContext.Provider value={copy}>
     <div>
       <DrawerAppBar />
       <div style={{
@@ -91,7 +89,6 @@ const HandleState = () => {
         </div>
       </div>
     </div>
-    </MyContext.Provider>
   )
 }
 export default HandleState;

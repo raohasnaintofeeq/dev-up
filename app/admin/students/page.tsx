@@ -4,19 +4,16 @@ import { getCookie } from "cookies-next";
 import DrawerAppBar from "../page";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton } from "@mui/material";
 import { Delete } from "@mui/icons-material";
-import {MyContext} from "@/app/context/page";
 
 const StudentData = () => {
-  const copy = useContext(MyContext)
  const getData = getCookie("saveData")
  let savedData: any[] = [];
 
- console.log("copy :: ", copy)
  if(getData){
     savedData = JSON.parse(getData)
   }
 
-const handleDelete = (roll) => {
+const handleDelete = (roll: any) => {
   savedData = savedData.filter((student) => student.rollnumber !== roll)
   console.log(" updated data :: ", savedData)
 }
