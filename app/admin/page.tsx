@@ -28,7 +28,7 @@ const routes = [
   },
   {
     name: "Attendance",
-    url: "/admin/Contact"
+    url: "/admin/Attendance"
   }
 ]
 

@@ -18,7 +18,8 @@ const width = {
   width: "100%"
 }
 const HandleState = () => {
-  const [copy, setCopy] = useState([] as any)
+
+  const [copy, setCopy] = useState<Props[]>([])
   const initialValues: Props = {
     name: "",
     fname: "",
@@ -35,6 +36,7 @@ const HandleState = () => {
       return updatedCopy
     })
   }
+  console.log("copy :: ", copy)
 
   return (
     <div>
