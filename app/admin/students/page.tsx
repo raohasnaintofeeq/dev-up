@@ -1,17 +1,26 @@
 "use client"
+import React, {useContext} from "react";
 import { getCookie } from "cookies-next";
 import DrawerAppBar from "../page";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton } from "@mui/material";
+import { Delete } from "@mui/icons-material";
+import {MyContext} from "@/app/context/page";
 
 const StudentData = () => {
+  const copy = useContext(MyContext)
  const getData = getCookie("saveData")
  let savedData: any[] = [];
 
+ console.log("copy :: ", copy)
  if(getData){
     savedData = JSON.parse(getData)
   }
-  // const newarray = savedData.filter((item: { class: string; }) => item.class === "nine")
-  // const matricStudent = savedData.filter((item: { class: string; }) => item.class === "matric")
+
+const handleDelete = (roll) => {
+  savedData = savedData.filter((student) => student.rollnumber !== roll)
+  console.log(" updated data :: ", savedData)
+}
+
   return (
     <div>
       <DrawerAppBar />
@@ -23,7 +32,7 @@ const StudentData = () => {
               <TableCell>father name</TableCell>
               <TableCell>class</TableCell>
               <TableCell>roll number</TableCell>
-             
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -33,6 +42,11 @@ const StudentData = () => {
                 <TableCell>{entry.fname}</TableCell>
                 <TableCell>{entry.class}</TableCell>
                 <TableCell>{entry.rollnumber}</TableCell>
+                <TableCell>
+                  <IconButton onClick={() => handleDelete(entry.rollnumber)}>
+                    <Delete />
+                  </IconButton>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
