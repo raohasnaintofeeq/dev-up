@@ -1,6 +1,6 @@
 "use client"
 import DrawerAppBar from "../page";
-import React, { useState, createContext } from "react";
+import React, { useState } from "react";
 import { Formik, Form, FormikHelpers } from "formik";
 import { setCookie } from "cookies-next";
 import { Button, Typography } from "@mui/material";
@@ -17,7 +17,6 @@ interface Props {
 const width = {
   width: "100%"
 }
-export const MyContext = createContext<Props[]>([])
 const HandleState = () => {
 
   const [copy, setCopy] = useState<Props[]>([])
@@ -28,7 +27,6 @@ const HandleState = () => {
     rollnumber: 0
   }
 
-  console.log("my context :: ", MyContext)
   const handleSubmitForm = (values: Props) => {
     const payload = { ...values }
 
