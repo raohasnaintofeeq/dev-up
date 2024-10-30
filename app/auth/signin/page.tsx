@@ -34,7 +34,7 @@ const LoginPage = () => {
     });
 
     // Redirect to a protected route
-    router.push('/admin');
+    router.push('/admin/dashboard');
   };
 
   return (

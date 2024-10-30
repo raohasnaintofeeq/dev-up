@@ -1,13 +1,7 @@
 import React from "react"
 import { FormControl, InputLabel, Select, MenuItem, Box } from "@mui/material";
 import { Field } from "formik";
-
-const ClassName = [
-  { id: "nine", name: "Nine" },
-  { id: "tenth", name: "Tenth" },
-  { id: "firstyear", name: "First Year" },
-  { id: "secondyear", name: "Second Year" },
-]
+import { ClassName } from "@/constants/select/select"
 
 const SelectInput = ({ name, label, labelId, ...props }: any) => {
   return (
