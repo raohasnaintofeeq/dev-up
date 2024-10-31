@@ -1,5 +1,5 @@
 "use client"
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Grid, Paper, Avatar, Typography, TextField, Button, FormControlLabel, Checkbox, Link
 } from '@mui/material';
@@ -7,10 +7,12 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useRouter } from 'next/navigation';
-import { setCookie } from 'cookies-next';
+import { getCookie, setCookie } from 'cookies-next';
+import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
 
 const LoginPage = () => {
   const router = useRouter();
+  const [notification, setNotification] = useState(false);
 
   const initialValues = {
     email: '',
@@ -25,8 +27,12 @@ const LoginPage = () => {
 
   const onSubmit = async (values: any) => {
     // Simulate a login API call and token generation
-    const simulatedToken = '1234567890abcdef';
+    const simulatedToken = {
+      email: "onlineattendance@gmail.com",
+      password: "password"
+    };
 
+    console.log("values :: ", values)
     // Store the token in a cookie
     setCookie('token', simulatedToken, {
       maxAge: values.remember ? 30 * 24 * 60 * 60 : undefined, // 30 days if 'remember me' is checked
@@ -34,11 +40,24 @@ const LoginPage = () => {
     });
 
     // Redirect to a protected route
-    router.push('/admin/dashboard');
+    if (values.email === "onlineattendance@gmail.com" && values.password === "password") {
+      router.push('/admin/dashboard');
+      setNotification(true)
+    }
+    const getAuth = JSON.parse(getCookie("token") as string)
+
   };
+
 
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>
+      {notification && 
+        <Snackbar
+          open={notification}
+          autoHideDuration={5000}
+          message="successfully logedIn"
+        />
+      }
       <Grid
         item
         xs={12} sm={8} md={5}

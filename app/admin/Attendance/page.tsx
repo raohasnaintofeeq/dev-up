@@ -1,9 +1,13 @@
 "use client"
 import React, { useState } from 'react';
+import DrawerAppBar from '../page';
 
 const Attendance = () => {
   return (
-    <div> hasnain ali here</div>
+    <div>
+      <DrawerAppBar />
+      <div> hasnain ali here</div>
+    </div>
   )
 }
 export default Attendance;
