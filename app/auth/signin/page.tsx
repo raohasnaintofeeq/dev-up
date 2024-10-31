@@ -44,8 +44,8 @@ const LoginPage = () => {
       router.push('/admin/dashboard');
       setNotification(true)
     }
-    const getAuth = JSON.parse(getCookie("token"))
-    console.log("auth :: ", getAuth)
+    const getAuth = JSON.parse(getCookie("token") as string)
+
   };
 
 
