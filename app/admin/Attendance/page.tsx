@@ -3,10 +3,32 @@ import React, { useState } from 'react';
 import DrawerAppBar from '../page';
 
 const Attendance = () => {
+  const studentData = [
+    {
+      id: 0,
+      name: "hasnain",
+      fatherName: "tofeeq",
+      hobbies: ["reading", "problem solving"]
+    }
+  ]
+  console.log("student data is here :: ", studentData)
   return (
     <div>
       <DrawerAppBar />
       <div> hasnain ali here</div>
+      <ul>{studentData.map((data) => (
+        <>
+       <li>
+       {data.id}
+      </li>  <li>
+        {data.name}
+       </li>  <li>
+        {data.fatherName}
+       </li> 
+       <h2>hobiies</h2>
+       <li>{data.hobbies}</li>
+       </>
+      ))}</ul>
     </div>
   )
 }

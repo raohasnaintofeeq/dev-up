@@ -38,13 +38,13 @@ const LoginPage = () => {
       maxAge: values.remember ? 30 * 24 * 60 * 60 : undefined, // 30 days if 'remember me' is checked
       secure: true
     });
+    const getAuth = JSON.parse(getCookie("token") as string)
 
     // Redirect to a protected route
-    if (values.email === "onlineattendance@gmail.com" && values.password === "password") {
+    if (values.email === getAuth.email && values.password ===getAuth.password) {
       router.push('/admin/dashboard');
       setNotification(true)
     }
-    const getAuth = JSON.parse(getCookie("token") as string)
 
   };
 
@@ -75,8 +75,8 @@ const LoginPage = () => {
         <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign In
+        <Typography component="h3" variant="h5">
+          hypemalls
         </Typography>
         <Formik
           initialValues={initialValues}
@@ -142,7 +142,7 @@ const LoginPage = () => {
           )}
         </Formik>
       </Grid>
-      <Grid
+      {/* <Grid
         item
         xs={false}
         sm={4}
@@ -155,7 +155,7 @@ const LoginPage = () => {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
-      />
+      /> */}
     </Grid>
   );
 };
